@@ -52,7 +52,8 @@ const getHECPayload = async function(blobContent) {
     
                     for (i in ruleFlow.flowTuples) {
                         let ruleFlowTuple = ruleFlow.flowTuples[i]
-                        
+
+                        console.log(record)
                         let splunkEvent = {}
                         splunkEvent["time"] = record.time
                         splunkEvent["systemId"] = record.systemId
@@ -63,6 +64,8 @@ const getHECPayload = async function(blobContent) {
                         splunkEvent["rule"] = flow.rule
                         splunkEvent["mac"] = ruleFlow.mac
                         splunkEvent["flowTuple"] = ruleFlowTuple
+                        splunkEvent["product_id"] = 14958
+                        splunkEvent["used_for"] = "non_prod"
     
                         let recordEvent = {
                             "event": JSON.stringify(splunkEvent),
