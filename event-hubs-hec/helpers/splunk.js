@@ -58,6 +58,8 @@ const getHECPayload = async function(message, sourcetype) {
 
     try {
         jsonMessage = JSON.parse(message);
+        jsonMessage["product_id"] = 14958;
+        jsonMessage["used_for"] = "non_prod";
     } catch (err) {
         // The message is not JSON, so send it as-is.
         let payload = {
