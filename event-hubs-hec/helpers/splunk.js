@@ -58,8 +58,6 @@ const getHECPayload = async function(message, sourcetype) {
 
     try {
         jsonMessage = JSON.parse(message);
-        jsonMessage["product_id"] = 14958;
-        jsonMessage["used_for"] = "non_prod";
     } catch (err) {
         // The message is not JSON, so send it as-is.
         let payload = {
@@ -74,7 +72,8 @@ const getHECPayload = async function(message, sourcetype) {
         let payload = ''
 
         jsonMessage.records.forEach(function(record) {
-            
+            record["product_id"] = 14958;
+            record["used_for"] = "non_prod";
             let recordEvent = {
                 "sourcetype": sourcetype,
                 "event": JSON.stringify(record)
@@ -93,6 +92,9 @@ const getHECPayload = async function(message, sourcetype) {
     }
 
     // If we made it here, the JSON does not contain a records[] array, so send the data as-is
+    jsonMessage["product_id"] = 14958;
+    jsonMessage["used_for"] = "non_prod";
+    
     let payload = {
         "sourcetype": sourcetype,
         "event": JSON.stringify(jsonMessage)
